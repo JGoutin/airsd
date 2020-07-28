@@ -7,7 +7,7 @@ Airsd (Air send) is a simple file sharing utility.
 It allows sharing files using your own cloud storage as the only backend. No web server 
 or extra services are required, this also mean no maintenance and minimal costs.
 
-Airsd uses presigned/temporary URL features of cloud storage to give access to the 
+Airsd uses shareable URL features of cloud storage to give access to the 
 privately stored file to the recipient.
 
 It also provides the following features:
@@ -19,13 +19,20 @@ It also provides the following features:
 * URL link expiration delay.
 * Python API to use it from your own code.
 
-## Supported storage
+For more information, refer to the [documentation](https://airsd.readthedocs.io).
 
-A cloud storage is required to use Airsd.
+## Supported storage hosts
+
+A cloud storage is required to host files.
  
-Following storage are currently supported (With more to come):
+All storage that support the `airfs.get_shareable_url` feature can be used as host.
 
-* AWS S3
+Known list of supported storage:
+
+* Amazon Web Services S3 (and compatible)
+* Microsoft Azure Blobs Storage
+* Microsoft Azure Files Storage
+* OpenStack Swift / Object Store
 
 ## See also
 

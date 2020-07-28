@@ -1,5 +1,5 @@
-airsd API
-=========
+Python API
+==========
 
 This section describes the ``airsd`` Python package API.
 
