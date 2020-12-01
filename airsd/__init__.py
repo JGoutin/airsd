@@ -66,11 +66,11 @@ def get(url, output=".", extract=False):
                 dest.write(chunk)
 
 
-def put(*sources, host=None, expiry="24h", archive=False, compression=None, name=None):
+def put(sources, host=None, expiry="24h", archive=False, compression=None, name=None):
     """
 
     Args:
-        *sources (str): The files or directory to share.
+        sources (iterable of str): The files or directory to share.
         archive (bool): If True, create an archive before putting on the share.
             Automatic if "sources" is a directory or multiples files.
         expiry (str or int): The download expiry time. In hours, or with a specific time
@@ -107,16 +107,17 @@ def put(*sources, host=None, expiry="24h", archive=False, compression=None, name
     return _shareable_url(dst, expiry)
 
 
-def delete(*urls):
+def delete(urls):
     """
     Delete a shared file.
 
     Args:
-        *urls (str): Shareable URL of files to delete.
+        urls (iterable of str): Shareable URL of files to delete.
     """
+    # TODO: Fix unmounted storage not found because URL starts with https://
     for url in urls:
         url = _urlparse(url)
-        _remove(f"{url.scheme}://{url.netloc}/{url.path}")
+        _remove(f"{url.scheme}://{url.netloc}{url.path}")
 
 
 def _set_dst_path(src, config):

@@ -30,7 +30,7 @@ DEFAULT_CONFIG = dict(
     compression="gz",
     random_prefix=True,
     files_directory="files",
-    max_expiry=0,
+    max_expiry="1d",
     default_host="",
     host="",
 )
@@ -152,7 +152,7 @@ def get_host_config(host=None):
     except (FileNotFoundError, PermissionError):
         pass
 
-    config = dict()
+    config = DEFAULT_CONFIG.copy()
     for parser in parsers:
         for key in DEFAULT_CONFIG:
             try:

@@ -69,9 +69,9 @@ def _run_command():
         choices=COMPRESSIONS,
     )
     action.add_argument("--name", "-n", help="Rename the file being put.")
-    action.add_argument(
-        "--quiet", "-q", help="Only return download URL as output.", action="store_true"
-    )
+    # action.add_argument(
+    #     "--quiet", "-q", help="Only return download URL as output.", action="store_true"
+    # )
 
     description = "Get shared file from an URL."
     action = sub_parsers.add_parser("get", help=description, description=description)
@@ -80,9 +80,9 @@ def _run_command():
     action.add_argument(
         "--extract", "-e", help="Extract an archived file.", action="store_true"
     )
-    action.add_argument(
-        "--quiet", "-q", help="Does no show output.", action="store_true"
-    )
+    # action.add_argument(
+    #     "--quiet", "-q", help="Does no show output.", action="store_true"
+    # )
 
     description = "Delete a shared file."
     action = sub_parsers.add_parser("delete", help=description, description=description)
@@ -99,6 +99,7 @@ def _run_command():
     autocomplete(parser)
 
     args = vars(parser.parse_args())
+    debug = args.pop("debug")
     parser_action = args.pop("parser_action")
     if not parser_action:
         parser.error("An action is required")
@@ -114,7 +115,7 @@ def _run_command():
         parser.exit(status=1, message="Interrupted by user\n")
 
     except Exception as exception:
-        if args.get("debug"):
+        if debug:
             raise
         parser.exit(status=1, message=f"\033[31m{exception}\033[30m\n")
 
